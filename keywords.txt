@@ -1,0 +1,38 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+connected	KEYWORD2
+calibrateLow	KEYWORD2
+calibrateHigh	KEYWORD2
+calibrateSingle	KEYWORD2
+getDeviceInfo	KEYWORD2
+measureEC	KEYWORD2
+measureSeawater	KEYWORD2
+measureFreshwater	KEYWORD2
+measurePurewater	KEYWORD2
+measureTemp	KEYWORD2
+reset	KEYWORD2
+setDeviceInfo	KEYWORD2
+setI2CAddress	KEYWORD2
+update	KEYWORD2
+
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+Class ================================== 
+Mod_EC	KEYWORD1

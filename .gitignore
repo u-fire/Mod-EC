@@ -1,0 +1,10 @@
+documentation.sh
+Doxyfile
+api.md
+./rust/target/*
+rust/**
+python/**
+.vscode/**
+src/uFire_Mod-EC-Serial.cpp
+src/uFire_Mod-EC-Serial.h
+src/NMEAParser.h

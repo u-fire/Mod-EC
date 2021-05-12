@@ -1,0 +1,20 @@
+{
+  "name": "Microfire Mod-EC",
+  "keywords": "EC, Conductivity, hydroponics, salinity, ppt, psu, tds",
+  "description": "Add the ability to measure EC to your hardware application with a fully digital interface.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/u-fire/Isolated_EC.git"
+  },
+  "authors": [
+    {
+      "name": "Microfire LLC",
+      "email": "contact@ufire.co",
+      "url": "https://ufire.co",
+      "maintainer": true
+    }
+  ],
+  "version": "0.9.0",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
