@@ -13,6 +13,7 @@
 begin	KEYWORD2
 connected	KEYWORD2
 calibrateLow	KEYWORD2
+calibrateMid	KEYWORD2
 calibrateHigh	KEYWORD2
 calibrateSingle	KEYWORD2
 getDeviceInfo	KEYWORD2
