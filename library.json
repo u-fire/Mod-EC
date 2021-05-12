@@ -4,7 +4,7 @@
   "description": "Add the ability to measure EC to your hardware application with a fully digital interface.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/u-fire/Isolated_EC.git"
+    "url": "https://github.com/u-fire/Mod-EC.git"
   },
   "authors": [
     {
