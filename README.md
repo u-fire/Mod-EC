@@ -3,7 +3,7 @@
 Mod-EC
 ======
 
-> [Datasheet](https://ufire.dev/files/mod-ec_datasheet.pdf) 📜
+> [Datasheet](https://www.ufire.co/files/isolated_qwiic_dev_board_schematic.pdf) 📜
 
 Add the ability to measure EC to your hardware application with a fully digital interface.
 
@@ -22,8 +22,8 @@ Add the ability to measure EC to your hardware application with a fully digital 
 
 ### Use
 
-*   [I²C Arduino Library Documentation](https://ufire.dev/files/mod-ec_arduino_library.pdf)
-*   [I²C Raspberry Pi Python Documentation](https://ufire.dev/files/mod-ec_raspberrypi_library.pdf)
+*   [I²C Arduino Library Documentation](https://docs.google.com/document/d/13rdFA7Kfsq4sykMppDxd-BCVynKoE-gv_IsZ4FOFS-M/export?format=pdf)
+*   [I²C Raspberry Pi Python Documentation](https://docs.google.com/document/d/13dW2I0XiXfZA4_QlN2FZAkEKyt51JY7J6U3TlaOEwRY/export?format=pdf)
 
 * * *
 
@@ -37,8 +37,8 @@ Adding a module to your own design is straightforward. You'll need:
 
 Some resources to get started:
 
-*   [Schematic of the I2C Isolated Dev Board](https://ufire.dev/files/isolated_qwiic_dev_board_schematic.pdf)
-*   Design Incorporation section of the [Datasheet](https://ufire.dev/files/mod-ec_datasheet.pdf)
+*   [Schematic of the I2C Isolated Dev Board](https://www.ufire.co/files/isolated_qwiic_dev_board_schematic.pdf)
+*   Design Incorporation section of the [Datasheet](https://www.ufire.co/files/isolated_qwiic_dev_board_schematic.pdf)
 
 > [Request a custom board](https://docs.google.com/forms/d/e/1FAIpQLSfiCyjnq35GVyaRjVw6HphhNFNmoyi723qlqVLjUhc-TrmvfQ/viewform)
 
@@ -51,6 +51,6 @@ Some resources to get started:
 
 * * *
 ### Buy One
-[Mod-EC](https://ufire.co) - just the sensor
+[Mod-EC](https://ufire.co/buy/)
 
-[Isolated Qwiic Dev Board](https://ufire.co) - all the components needed to use the module
+[Isolated Dev Board](https://ufire.co/buy/) - all the components needed to use the module

@@ -371,8 +371,8 @@ void help()
   Serial.println(F("sea           : temp_C[25.0], temp_Coef[0.021], temp_Constant[25.0], K[10.0] : Starts a salinity measurement."));
   Serial.println(F("sin           : calibration_mS, temp_C[25.0], temp_Coef[0.019], temp_Constant[25.0], K[1.0] : Single-point calibration."));
   Serial.println(F("temp -or- t   : no parameters : Starts a temperature measurement"));
-  
 }
+
 void cmd_run()
 {
   if ((cmd == "config") || (cmd == "c")) config();
