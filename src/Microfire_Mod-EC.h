@@ -6,7 +6,6 @@
 
 #define UFIRE_MOD_EC 0x0a
 #define MEASURE_EC_TASK 80      /*!< Command to start an EC measure */
-#define MEASURE_TEMP_TASK 40    /*!< Command to measure temperature */
 #define CALIBRATE_LOW_TASK 20   /*!< Command to calibrate the probe */
 #define CALIBRATE_MID_TASK 10   /*!< Command to calibrate the probe */
 #define CALIBRATE_HIGH_TASK 8   /*!< Command to calibrate the high point of the probe */
@@ -29,14 +28,14 @@
 #define CALIBRATE_READMID_REGISTER 28       /*!< reading mid register */
 #define CALIBRATE_REFHIGH_REGISTER 32       /*!< reference high register */
 #define CALIBRATE_READHIGH_REGISTER 36      /*!< reading high register */
-#define CALIBRATE_SINGLE_OFFSET_REGISTER 40 /*!< calibration temperature register */
+#define CALIBRATE_SINGLE_OFFSET_REGISTER 40 /*!< calibration single register */
 #define COEFFICIENT_REGISTER 44             /*!< temperature coefficient register */
 #define CONSTANT_REGISTER 48                /*!< temperature constant register */
 #define K_REGISTER 52                       /*!< Probe cell constant register */
 #define KPA_REGISTER 56                     /*!< kPa register */
 #define DENSITY_REGISTER 60                 /*!< density register */
 
-namespace uFire
+namespace Microfire
 {
   namespace Mod_EC
   {
@@ -83,7 +82,6 @@ namespace uFire
       float measureSeawater(float tempC = 25.0, float tempCoef = 0.021, float tempConst = 25.0, float k = 10.0, float kPa = 0, bool blocking = true);
       float measureFreshwater(float tempC = 25.0, float tempCoef = 0.019, float tempConst = 25.0, float k = 1.0, bool blocking = true);
       float measurePurewater(float tempC = 25.0, float tempCoef = 0.019, float tempConst = 25.0, float k = 0.1, bool blocking = true);
-      float measureTemp(bool blocking = true);
       void reset();
       void setDeviceInfo(float calibrationLowReading, float calibrationLowReference, float calibrationMidReading, float calibrationMidReference, float calibrationHighReading, float calibrationHighReference, float calibrationSingleOffset);
       void setI2CAddress(uint8_t i2cAddress);
@@ -123,5 +121,5 @@ namespace uFire
       uint8_t _read_byte(uint8_t reg);
     };
   } // namespace Mod_EC
-} // namespace uFire
+} // namespace Microfire
 #endif // ifndef Mod_EC_H

@@ -1,28 +1,28 @@
-#include "uFire_Mod-EC.h"
+#include "Microfire_Mod-EC.h"
 
-float uFire::Mod_EC::i2c::__S = -1;
-float uFire::Mod_EC::i2c::_mS = -1;
-float uFire::Mod_EC::i2c::_uS = -1;
-float uFire::Mod_EC::i2c::_PSU = -1;
-float uFire::Mod_EC::i2c::_tempC = -1;
-float uFire::Mod_EC::i2c::_tempF = -1;
-int uFire::Mod_EC::i2c::_PPM_500 = -1;
-int uFire::Mod_EC::i2c::_PPM_640 = -1;
-int uFire::Mod_EC::i2c::_PPM_700 = -1;
-float uFire::Mod_EC::i2c::_calibrationLowReading = -1;
-float uFire::Mod_EC::i2c::_calibrationLowReference = -1;
-float uFire::Mod_EC::i2c::_calibrationMidReading = -1;
-float uFire::Mod_EC::i2c::_calibrationMidReference = -1;
-float uFire::Mod_EC::i2c::_calibrationHighReading = -1;
-float uFire::Mod_EC::i2c::_calibrationHighReference = -1;
-float uFire::Mod_EC::i2c::_calibrationSingleOffset = -1;
-int uFire::Mod_EC::i2c::_hwVersion = -1;
-int uFire::Mod_EC::i2c::_fwVersion = -1;
-int uFire::Mod_EC::i2c::_i2c_address = -1;
-int uFire::Mod_EC::i2c::_status = -1;
-float uFire::Mod_EC::i2c::_density = -1;
+float Microfire::Mod_EC::i2c::__S = -1;
+float Microfire::Mod_EC::i2c::_mS = -1;
+float Microfire::Mod_EC::i2c::_uS = -1;
+float Microfire::Mod_EC::i2c::_PSU = -1;
+float Microfire::Mod_EC::i2c::_tempC = -1;
+float Microfire::Mod_EC::i2c::_tempF = -1;
+int Microfire::Mod_EC::i2c::_PPM_500 = -1;
+int Microfire::Mod_EC::i2c::_PPM_640 = -1;
+int Microfire::Mod_EC::i2c::_PPM_700 = -1;
+float Microfire::Mod_EC::i2c::_calibrationLowReading = -1;
+float Microfire::Mod_EC::i2c::_calibrationLowReference = -1;
+float Microfire::Mod_EC::i2c::_calibrationMidReading = -1;
+float Microfire::Mod_EC::i2c::_calibrationMidReference = -1;
+float Microfire::Mod_EC::i2c::_calibrationHighReading = -1;
+float Microfire::Mod_EC::i2c::_calibrationHighReference = -1;
+float Microfire::Mod_EC::i2c::_calibrationSingleOffset = -1;
+int Microfire::Mod_EC::i2c::_hwVersion = -1;
+int Microfire::Mod_EC::i2c::_fwVersion = -1;
+int Microfire::Mod_EC::i2c::_i2c_address = -1;
+int Microfire::Mod_EC::i2c::_status = -1;
+float Microfire::Mod_EC::i2c::_density = -1;
 
-namespace uFire
+namespace Microfire
 {
   namespace Mod_EC
   {
@@ -172,18 +172,6 @@ namespace uFire
       return uS;
     }
 
-    // Measures temperature using an optionally connected DS18B20 sensor
-    float i2c::measureTemp(bool blocking)
-    {
-      _send_command(MEASURE_TEMP_TASK);
-      if (blocking)
-        delay(EC_TEMP_MEASURE_TIME);
-
-      _updateRegisters();
-
-      return tempC;
-    }
-
     // Resets all system calibration information.
     void i2c::reset()
     {
@@ -216,7 +204,7 @@ namespace uFire
       _address = i2cAddress;
     }
 
-    // If measureEC (or related) was called with blocking = true, this retrieves the latest pH measurement.
+    // If measureEC (or related) was called with blocking = true, this retrieves the latest measurement.
     void i2c::update()
     {
       _updateRegisters();
@@ -233,7 +221,6 @@ namespace uFire
       _mS = _read_4_bytes(MS_REGISTER);
       _PSU = _read_4_bytes(PSU_REGISTER);
       _density = _read_4_bytes(DENSITY_REGISTER);
-      _tempC = _read_4_bytes(TEMP_C_REGISTER);
 
       if (_status == 0)
       {
@@ -242,7 +229,6 @@ namespace uFire
         _PPM_700 = _mS * 700;
         _uS = _mS * 1000;
         __S = _mS / 1000;
-        _tempF = ((tempC * 9) / 5) + 32;
         getDeviceInfo();
       }
       else
@@ -253,8 +239,6 @@ namespace uFire
         _PPM_700 = 0;
         _uS = 0;
         __S = 0;
-        _tempF = -127;
-        _tempC = -127;
         _PSU = -127;
       }
     }

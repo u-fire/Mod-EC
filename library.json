@@ -1,6 +1,6 @@
 {
   "name": "Microfire_Mod-EC",
-  "keywords": "EC, Conductivity, hydroponics, salinity, ppt, psu, tds",
+  "keywords": "EC, Conductivity, hydroponics, tds",
   "description": "Add the ability to measure EC to your hardware application with a fully digital interface.",
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
       "maintainer": true
     }
   ],
-  "version": "1.0.0",
+  "version": "2.0.0",
   "frameworks": "arduino",
   "platforms": "*"
 }

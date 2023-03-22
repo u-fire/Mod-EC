@@ -4,7 +4,7 @@
    questions@microfire.co to get in touch with someone
 
    Mod-EC hardware version 2, firmware 1
-
+   
    This allows you to run various functions in a command-line like interface.
    Enter:
    `config` to see the configuration of the device.
@@ -13,37 +13,48 @@
    Measure EC:
      ec <solution temp [25]> <temp coefficient [0.019]> <temp constant [25.0]> <probe constant [1.0]>
       `ec` - EC measurement with default parameters
+      `ec t` - EC measurement using result of measureTemp() for solution temperature
 
    Single Point Calibration:
     sin <calibration solution in mS> <solution temp [25]> <temp coefficient [0.019]> <temp constant [25.0]> <probe constant [1.0]>
-      `sin 1.413` - Calibrate at 1.413 mS
+      `sin 1.413 t` - Calibrate at 1.413 mS using measureTemp() for solution temp
 
    Dual Point Calibration:
     low <calibration solution in mS> <solution temp [25]> <temp coefficient [0.019]> <temp constant [25.0]> <probe constant [1.0]>
-      `low 0.7` - Calibrate at 0.7 mS 
+      `low 0.7 t` - Calibrate at 0.7 mS using measureTemp() for solution temp
 
     high <calibration solution in mS> <solution temp [25]> <temp coefficient [0.019]> <temp constant [25.0]> <probe constant [1.0]>
-      `high 12.88` - Calibrate at 12.88 mS
+      `high 12.88 t` - Calibrate at 12.88 mS using measureTemp() for solution temp
 
    Triple Point Calibration:
     low <calibration solution in mS> <solution temp [25]> <temp coefficient [0.019]> <temp constant [25.0]> <probe constant [1.0]>
-      `low 0.1` - Calibrate at 0.1 mS
+      `low 0.1 t` - Calibrate at 0.1 mS using measureTemp() for solution temp
     mid <calibration solution in mS> <solution temp [25]> <temp coefficient [0.019]> <temp constant [25.0]> <probe constant [1.0]>
-      `mid 1.0` - Calibrate at 1.0 mS
+      `mid 1.0 t` - Calibrate at 1.0 mS using measureTemp() for solution temp
     high <calibration solution in mS> <solution temp [25]> <temp coefficient [0.019]> <temp constant [25.0]> <probe constant [1.0]>
-      `high 10.0` - Calibrate at 10.0 mS
+      `high 10.0 t` - Calibrate at 10.0 mS using measureTemp() for solution temp
+
+   Measure Temperature:
+    temp
 
    Change the I2C address:
     i2c 0x0E
 */
-#include "Microfire_Mod-EC.h"
+#include <Microfire_Mod-EC.h>
+#include <OneWire.h>              // Click here to install the library: http://librarymanager/All#OneWire
+#include <DallasTemperature.h>    // Click here to install the library: http://librarymanager/All#DallasTemperature
 
+// what pin is the temperature sensor's signal pin connected to?
+#define ONE_WIRE_BUS 2
+
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature temp(&oneWire);
 Microfire::Mod_EC::i2c ec;
 
 String buffer, cmd, p1, p2, p3, p4, p5;
-float temp_c, temp_coef, temp_constant, k, density;
-const int fw_compatible = 2;
-const int hw_compatible = 1;
+float temp_c, temp_f, temp_coef, temp_constant, k, density;
+const int fw_compatible = 1;
+const int hw_compatible = 2;
 
 void config()
 {
@@ -81,6 +92,19 @@ void config_reset()
   config();
 }
 
+void temperature()
+{
+  temp.requestTemperatures();
+  temp_c = temp.getTempCByIndex(0);
+  temp_f = ((temp_c * 9) / 5) + 32;
+
+  Serial.print("C|F: ");
+  Serial.print(temp_c);
+  Serial.print(" | ");
+  Serial.println(temp_f);
+
+}
+
 void i2c()
 {
   uint8_t i2c_address;
@@ -114,6 +138,11 @@ void measure_ec()
 
   while (Serial.available() == 0)
   {
+    if (p1 == "t")
+    {
+      temp.requestTemperatures();
+      temp_c = temp.getTempCByIndex(0);
+    }
     ec.measureEC(temp_c, temp_coef, temp_constant, k, 0, true);
 
     switch (ec.status)
@@ -128,8 +157,8 @@ void measure_ec()
         Serial.println("Error: Check parameters or calibration");
         break;
       case ec.STATUS_NO_ERROR:
-          Serial.print(ec.mS);
-          Serial.println((String)" mS/cm @ " + temp_c + "°C");
+        Serial.print(ec.mS);
+        Serial.println((String)" mS/cm @ " + temp_c + "°C");
         break;
     }
     delay(1000);
@@ -143,6 +172,11 @@ void low()
   if (p4.length() ? temp_constant = p4.toFloat() : temp_constant = 25.0);
   if (p5.length() ? k = p5.toFloat() : k = 1.0);
 
+  if (p2 == "t")
+  {
+    temp.requestTemperatures();
+    temp_c = temp.getTempCByIndex(0);
+  }
   ec.calibrateLow(p1.toFloat(), temp_c, temp_coef, temp_constant, k, true);
   switch (ec.status)
   {
@@ -168,6 +202,11 @@ void mid()
   if (p4.length() ? temp_constant = p4.toFloat() : temp_constant = 25.0);
   if (p5.length() ? k = p5.toFloat() : k = 1.0);
 
+  if (p2 == "t")
+  {
+    temp.requestTemperatures();
+    temp_c = temp.getTempCByIndex(0);
+  }
   ec.calibrateMid(p1.toFloat(), temp_c, temp_coef, temp_constant, k, true);
   switch (ec.status)
   {
@@ -193,6 +232,11 @@ void high()
   if (p4.length() ? temp_constant = p4.toFloat() : temp_constant = 25.0);
   if (p5.length() ? k = p5.toFloat() : k = 1.0);
 
+  if (p2 == "t")
+  {
+    temp.requestTemperatures();
+    temp_c = temp.getTempCByIndex(0);
+  }
   ec.calibrateHigh(p1.toFloat(), temp_c, temp_coef, temp_constant, k, true);
   switch (ec.status)
   {
@@ -218,6 +262,11 @@ void sin()
   if (p4.length() ? temp_constant = p4.toFloat() : temp_constant = 25.0);
   if (p5.length() ? k = p5.toFloat() : k = 1.0);
 
+  if (p2 == "t")
+  {
+    temp.requestTemperatures();
+    temp_c = temp.getTempCByIndex(0);
+  }
   ec.calibrateSingle(p1.toFloat(), temp_c, temp_coef, temp_constant, k, true);
   switch (ec.status)
   {
@@ -247,12 +296,14 @@ void help()
   Serial.println(F("mid           : calibration_mS, temp_C[25.0], temp_Coef[0.019], temp_Constant[25.0], K[1.0] : Mid-point calibration."));
   Serial.println(F("reset -or- r  : no parameters : Returns all configuration information to default values."));
   Serial.println(F("sin           : calibration_mS, temp_C[25.0], temp_Coef[0.019], temp_Constant[25.0], K[1.0] : Single-point calibration."));
-}
+  Serial.println(F("temp -or- t   : no parameters : Starts a temperature measurement"));
 
+}
 void cmd_run()
 {
   if ((cmd == "config") || (cmd == "c")) config();
   if ((cmd == "reset") || (cmd == "r")) config_reset();
+  if ((cmd == "temp") || (cmd == "t")) temperature();
   if (cmd == "low") low();
   if (cmd == "mid") mid();
   if (cmd == "high") high();
@@ -315,6 +366,7 @@ void setup()
 {
   Wire.begin();
   ec.begin();
+  temp.begin();
   Serial.begin(9600);
   Serial.println("Type `help` for a list of commands");
   config();
