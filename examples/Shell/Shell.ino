@@ -42,8 +42,8 @@ Microfire::Mod_EC::i2c ec;
 
 String buffer, cmd, p1, p2, p3, p4, p5;
 float temp_c, temp_coef, temp_constant, k, density;
-const int fw_compatible = 2;
-const int hw_compatible = 1;
+const int fw_compatible = 1;
+const int hw_compatible = 2;
 
 void config()
 {
