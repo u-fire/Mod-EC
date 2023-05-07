@@ -1,5 +1,5 @@
 {
-  "name": "Microfire_Mod-EC",
+  "name": "Microfire Mod-EC",
   "keywords": "EC, Conductivity, hydroponics, tds",
   "description": "Add the ability to measure EC to your hardware application with a fully digital interface.",
   "repository": {
@@ -10,7 +10,7 @@
     {
       "name": "Microfire LLC",
       "email": "contact@ufire.co",
-      "url": "https://ufire.co",
+      "url": "https://microfire.co",
       "maintainer": true
     }
   ],
