@@ -10,8 +10,6 @@ Add the ability to measure EC to your hardware application with a fully digital 
 #### Summary ℹ️
 
 *   EC range of 0.1 mS/cm to 10.0 mS/cm
-*   Accuracy ±0.02  mS/cm
-*   Resolution 0.01 mS/cm
 *   Temperature compensated
 *   I²C interfaces
 *   25x15 mm for castellated or DIP mounting
